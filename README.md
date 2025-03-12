@@ -14,3 +14,21 @@
 #### vtp mode transparent
 #### vtp domain G14_technet
 #### vtp password secure2025
+
+### Vlan
+
+#### vlan 12
+#### name Ventas
+#### exit
+
+#### vlan 22
+#### name Ventas
+#### exit
+
+#### vlan 32
+#### name Gerencia
+#### exit
+
+#### vlan 42
+#### name Seguridad
+#### exit
