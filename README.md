@@ -22,7 +22,7 @@
 #### exit
 
 #### vlan 22
-#### name Ventas
+#### name Soporte
 #### exit
 
 #### vlan 32
@@ -32,3 +32,16 @@
 #### vlan 42
 #### name Seguridad
 #### exit
+
+
+## Visualizar configuraciones
+
+#### show vtp status
+#### show vlan brief
+### show interfaces trunk
+
+enable
+configure t
+vtp mode client
+vtp domain G14_technet
+vtp password secure2025
