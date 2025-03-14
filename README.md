@@ -1,3 +1,7 @@
+
+
+##Detalle de los comandos Usados
+
 # Configuración del Área de Administración 📌
 
 ## Configuración de VTP en Modo Cliente
@@ -36,18 +40,54 @@ name Gerencia
 vlan 42
 name Seguridad
 exit
+show vlan brief
 ```
-
-
-
-
-
-
-##Detalle de los comandos Usados
+vlan recepcion
+```bash
+enable
+configure terminal
+vlan 52
+name Recepcion
+exit
+```
+Configurar interfaces como Trunk en los switches de la administración
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1 - 2
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42,52
+exit
+show interfaces trunk
+```
+Configurar MSW5 como el switch root para STP
+```bash
+enable
+configure terminal
+spanning-tree mode pvst
+spanning-tree vlan 12,22,32,42,52 root primary
+exit
+```
+Configurar MSW6 como root secundario
+```bash
+enable
+configure terminal
+spanning-tree vlan 12,22,32,42,52 root secondary
+exit
+```
+Verificar STP
+```bash
+show spanning-tree vlan 12
+show spanning-tree vlan 22
+show spanning-tree vlan 32
+show spanning-tree vlan 42
+show spanning-tree vlan 52
+```
 
 ###Area de Infraestructura
 
-## Configuracion area de estructura**
+## Configuración del Área de la estructura**
 
 ### **MSW8**
 ```bash
