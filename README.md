@@ -34,6 +34,22 @@
 | 192.168.42.8        | Laptop-PT Seguridad8       |
 | 192.168.22.4        | PC-PT Soporte Tecnico 4    |
 
+# 📸 Capturas de la implementacion de las topologias
+## 🌐 Protocolos VTP
+### AREA CENTRAL
+![](CAPTURAS/VTPSERVIDOR.png)
+
+### AREA DE ADMINISTRACION
+![](CAPTURAS/VTPTRANSPARENTE.png)
+
+### AREA DE DESARROLLO 
+![](CAPTURAS/VTPCLIENTE01.png)
+
+### AREA DE GERENCIA
+![](CAPTURAS/VTPCLIENTE02.png)
+
+### AREA DE INFRAESTRUCTURA
+![](CAPTURAS/VTPCLIENTE02.png)
 
 ##Detalle de los comandos Usados
 
@@ -474,4 +490,21 @@ show spanning-tree vlan 22
 show spanning-tree vlan 32
 show spanning-tree vlan 42
 ```
+
+# 📸 Capturas del ping entre hosts
+### AREA CENTRAL
+![](CAPTURAS/VTPSERVIDOR.png)
+
+### AREA DE ADMINISTRACION
+![](CAPTURAS/VTPTRANSPARENTE.png)
+
+### AREA DE DESARROLLO 
+![](CAPTURAS/VTPCLIENTE01.png)
+
+### AREA DE GERENCIA
+![](CAPTURAS/VTPCLIENTE02.png)
+
+### AREA DE INFRAESTRUCTURA
+![](CAPTURAS/VTPCLIENTE02.png)
+
 
