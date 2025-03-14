@@ -1,50 +1,45 @@
-# REDES1_1S2025G14
-## Area de administración clientes
-### Area
-#### enable 
-#### configure t
-#### vtp mode client
-#### vtp domain G14_technet
-#### vtp password secure2025
-#### spanning-tree mode pvst
-#### spanning-tree mode rapid-pvst
-### Recepción
-#### enable 
-#### configure t
-#### vtp mode transparent
-#### vtp domain G14_technet
-#### vtp password secure2025
+# Configuración del Área de Administración 📌
 
-### Vlan
-
-#### vlan 12
-#### name Ventas
-#### exit
-
-#### vlan 22
-#### name Soporte
-#### exit
-
-#### vlan 32
-#### name Gerencia
-#### exit
-
-#### vlan 42
-#### name Seguridad
-#### exit
-
-
-## Visualizar configuraciones
-
-#### show vtp status
-#### show vlan brief
-### show interfaces trunk
-
+## Configuración de VTP en Modo Cliente
+### **Modo Cliente:** `SW0, SW1, SW2, SW3, SW4, MSW5, MSW6, MSW7`
+```bash
 enable
-configure t
-vtp mode client
+configure terminal
 vtp domain G14_technet
+vtp mode client
 vtp password secure2025
+exit
+```
+verificar configuracion
+```bash
+show vtp status
+```
+Modo transparente SW5
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode transparent
+vtp password secure2025
+exit
+```
+configurar vlans
+```bash
+enable
+configure terminal
+vlan 12
+name Ventas
+vlan 22
+name Soporte
+vlan 32
+name Gerencia
+vlan 42
+name Seguridad
+exit
+```
+
+
+
 
 
 
@@ -52,7 +47,7 @@ vtp password secure2025
 
 ###Area de Infraestructura
 
-## **1️⃣ Configuración de `MSW8` y `MSW9` con EtherChannel**
+## Configuracion area de estructura**
 
 ### **MSW8**
 ```bash
