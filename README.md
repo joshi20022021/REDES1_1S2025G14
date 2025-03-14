@@ -507,4 +507,32 @@ show spanning-tree vlan 42
 ### AREA DE INFRAESTRUCTURA
 ![](CAPTURAS/VTPCLIENTE02.png)
 
+# 📌 Presupuesto del Proyecto de Red
+
+## 🖥️ Equipos de Red
+
+| **Cantidad** | **Descripción**                                           | **Precio Unitario (GTQ)** | **Subtotal (GTQ)** |
+|--------------|-----------------------------------------------------------|---------------------------|--------------------|
+| 12           | Switch Capa 3 Ubiquiti Enterprise 24 puertos PoE+         | Q13,495.00                | Q161,940.00        |
+| 14           | Switch Capa 2 FS S3910-48TF de 48 puertos Gigabit         | Q6,500.00                 | Q91,000.00         |
+| 4            | Laptop HP Victus 15-FB0122LA                              | Q5,699.00                 | Q22,796.00         |
+| 20           | PC Lenovo ThinkCentre M70q, Core i5, 16GB RAM, 256GB SSD  | Q3,845.00                 | Q76,900.00         |
+| 34           | Cables de red Cat6 (5m)                                   | Q35.00                    | Q1,190.00          |
+| 34           | Cables de red Cat6 (10m)                                  | Q50.00                    | Q1,700.00          |
+| 1            | Rack para montaje de switches                             | Q2,310.92                 | Q2,310.92          |
+
+## 🛠️ Mano de Obra y Configuración
+
+| **Descripción**                           | **Costo (GTQ)** |
+|-------------------------------------------|-----------------|
+| Configuración de VLANs y STP              | Q1,540.62       |
+| Instalación física de los equipos         | Q1,155.46       |
+| Configuración de seguridad                | Q770.31         |
+
+## 💰 **Total del Proyecto**
+
+- **Total Equipos de Red:** Q357,636.92
+- **Total Mano de Obra:** Q3,466.39
+- **Total General:** **Q361,103.31**
+
 
