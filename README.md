@@ -45,3 +45,82 @@ configure t
 vtp mode client
 vtp domain G14_technet
 vtp password secure2025
+
+
+
+##Detalle de los comandos Usados
+###Area de Infraestructura
+## **1️⃣ Configuración de `MSW8` y `MSW9` con EtherChannel**
+### **MSW8**
+```bash
+configure terminal
+interface range FastEthernet0/3 - 5
+channel-group 14 mode active
+exit
+interface port-channel 14
+switchport mode trunk
+switchport trunk allowed vlan 12,22,32,42
+exit
+
+configure terminal
+interface range FastEthernet0/3 - 5
+channel-group 14 mode active
+exit
+interface port-channel 14
+switchport mode trunk
+switchport trunk allowed vlan 12,22,32,42
+exit
+
+configure terminal
+spanning-tree mode pvst
+spanning-tree vlan 12 root primary
+spanning-tree vlan 22 root primary
+spanning-tree vlan 32 root primary
+spanning-tree vlan 42 root primary
+exit
+
+SW6
+configure terminal
+vtp domain G14_technet
+vtp mode client
+vtp password secure2025
+
+! Configurar enlaces a MSW8 (Trunk en Fa0/1 - 2)
+interface range FastEthernet0/1 - 2
+switchport mode trunk
+switchport trunk allowed vlan 12,22,32,42
+exit
+
+! Configurar puertos para PCs (Access)
+interface FastEthernet0/3
+switchport mode access
+switchport access vlan 12
+exit
+
+interface FastEthernet0/4
+switchport mode access
+switchport access vlan 22
+exit
+
+configure terminal
+vtp domain G14_technet
+vtp mode client
+vtp password secure2025
+
+! Configurar enlaces a MSW8 (Trunk en Fa0/1)
+interface FastEthernet0/1
+switchport mode trunk
+switchport trunk allowed vlan 12,22,32,42
+exit
+
+! Configurar puertos para PCs (Access)
+interface FastEthernet0/2
+switchport mode access
+switchport access vlan 12
+exit
+
+interface FastEthernet0/3
+switchport mode access
+switchport access vlan 22
+exit
+```
