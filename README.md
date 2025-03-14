@@ -1,6 +1,42 @@
+# 📌 Universidad de San Carlos de Guatemala  
+### 🏛 Facultad de Ingeniería - Escuela de Ciencias y Sistemas  
+### 🖥 Laboratorio Redes De Computadoras 1, Sección: N  
+
+## 👤 Andrés Alejandro Agosto Méndez**  
+## 🎓 Carnet: **202113580**  
+## 👤 Nombre: **Edgar Josías Cán Ajquejay**  
+## 🎓 Carnet: **202112012** 
+
+## 🏥 **Proyecto 1**  
+---
+# 📌 Tabla de Direccionamiento IP
+
+| **Dirección IP**      | **Dispositivo**              |
+|----------------------|----------------------------|
+| 192.168.52.4        | PC-PT Recepcion4           |
+| 192.168.52.3        | PC-PT Recepcion3           |
+| 192.168.52.2        | PC-PT Recepcion2           |
+| 192.168.52.1        | PC-PT Recepcion1           |
+| 192.168.12.5        | PC-PT Ventas5              |
+| 192.168.12.2        | PC-PT Ventas2              |
+| 192.168.12.1        | PC-PT Ventas1              |
+| 192.168.22.3        | PC-PT Soporte Tecnico 3    |
+| 192.168.22.2        | PC-PT Soporte Tecnico 2    |
+| 192.168.22.5        | Laptop-PT Soporte Tecnico 5 |
+| 192.168.32.3        | PC-PT Gerencia3            |
+| 192.168.32.4        | PC-PT Gerencia4            |
+| 192.168.32.2        | PC-PT Gerencia2            |
+| 192.168.32.1        | PC-PT Gerencia1            |
+| 192.168.42.7        | PC-PT Seguridad7           |
+| 192.168.42.5        | PC-PT Seguridad5           |
+| 192.168.42.3        | Laptop-PT Seguridad3       |
+| 192.168.42.6        | Laptop-PT Seguridad6       |
+| 192.168.42.8        | Laptop-PT Seguridad8       |
+| 192.168.22.4        | PC-PT Soporte Tecnico 4    |
 
 
 ##Detalle de los comandos Usados
+
 ## 🏢 **Área Central (Backbone)**
 #### **Modo Servidor:** `Switch Servidor`
 ```bash
