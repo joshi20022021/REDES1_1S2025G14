@@ -493,16 +493,16 @@ show spanning-tree vlan 42
 
 # 📸 Capturas del ping entre hosts
 ### Area de administracion y de gerencia (ping entre departamento de gerencia)
-![](img/PING1.jpg)
+![](img/PING1.jpeg)
 
 ### Area de administracion (ping departamento de ventas)
-![](img/PING2.jpg)
+![](img/PING2.jpeg)
 
 ### Areas de Infraestructura y administracion (ping entre departamento de seguridad)
-![](img/PING3.jpg)
+![](img/PING3.jpeg)
 
 ### Areas de Desarrollo y gerencia (ping entre departamento de soporte técnico)
-![](img/PING4.jpg)
+![](img/PING4.jpeg)
 
 
 # 📌 Presupuesto del Proyecto de Red
