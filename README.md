@@ -1,11 +1,115 @@
 
 
 ##Detalle de los comandos Usados
+## 🏢 **Área Central (Backbone)**
+#### **Modo Servidor:** `Switch Servidor`
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode server
+vtp password secure2025
+exit
+show vtp status
+```
+#### **Modo Servidor:** `Switch Servidor`
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode server
+vtp password secure2025
+exit
+show vtp status
+```
+#### **Modo Cliente: MSW1, MSW2, MSW3, MSW4, MSW9, MSW10**
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode server
+vtp password secure2025
+exit
+show vtp status
+```
+#### **Configurar VLANs en el Servidor**
+```bash
+enable
+configure terminal
+vlan 10
+name Backbone1
+vlan 20
+name Backbone2
+vlan 30
+name Backbone3
+vlan 40
+name Backbone4
+exit
+show vlan brief
+```
+### **Configurar Trunking en los switches**
+#### **Switch Servidor**
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1 - 6
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 10,20,30,40
+exit
+```
+
+#### **MSW1, MSW2, MSW3, MSW4, MSW9, MSW10**
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1 - 6
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 10,20,30,40
+exit
+show interfaces trunk
+```
+
+#### **Configuración en MSW1 y MSW2 (LACP)**
+```bash
+enable
+configure terminal
+interface range FastEthernet0/3 - 5
+channel-group 14 mode active
+exit
+interface port-channel 14
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 10,20,30,40
+exit
+show etherchannel summary
+```
+
+#### **Configurar STP Root Bridge en el Servidor**
+```bash
+enable
+configure terminal
+spanning-tree mode pvst
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root primary
+spanning-tree vlan 30 root primary
+spanning-tree vlan 40 root primary
+exit
+```
+
+#### **Verificar STP**
+```bash
+show spanning-tree vlan 10
+show spanning-tree vlan 20
+show spanning-tree vlan 30
+show spanning-tree vlan 40
+```
 
 # Configuración del Área de Administración 📌
 
 ## Configuración de VTP en Modo Cliente
-### **Modo Cliente:** `SW0, SW1, SW2, SW3, SW4, MSW5, MSW6, MSW7`
+#### **Modo Cliente:** `SW0, SW1, SW2, SW3, SW4, MSW5, MSW6, MSW7`
 ```bash
 enable
 configure terminal
@@ -13,12 +117,10 @@ vtp domain G14_technet
 vtp mode client
 vtp password secure2025
 exit
-```
-verificar configuracion
-```bash
 show vtp status
 ```
-Modo transparente SW5
+
+#### **Modo transparente SW5**
 ```bash
 enable
 configure terminal
@@ -27,7 +129,8 @@ vtp mode transparent
 vtp password secure2025
 exit
 ```
-configurar vlans
+
+#### **configurar vlans**
 ```bash
 enable
 configure terminal
@@ -42,7 +145,8 @@ name Seguridad
 exit
 show vlan brief
 ```
-vlan recepcion
+
+#### **vlan recepcion**
 ```bash
 enable
 configure terminal
@@ -50,7 +154,8 @@ vlan 52
 name Recepcion
 exit
 ```
-Configurar interfaces como Trunk en los switches de la administración
+
+#### **Configurar interfaces como Trunk en los switches de la administración**
 ```bash
 enable
 configure terminal
@@ -61,7 +166,8 @@ switchport trunk allowed vlan 12,22,32,42,52
 exit
 show interfaces trunk
 ```
-Configurar MSW5 como el switch root para STP
+
+#### **Configurar MSW5 como el switch root para STP**
 ```bash
 enable
 configure terminal
@@ -69,14 +175,16 @@ spanning-tree mode pvst
 spanning-tree vlan 12,22,32,42,52 root primary
 exit
 ```
-Configurar MSW6 como root secundario
+
+#### **Configurar MSW6 como root secundario**
 ```bash
 enable
 configure terminal
 spanning-tree vlan 12,22,32,42,52 root secondary
 exit
 ```
-Verificar STP
+
+#### **Verificar STP**
 ```bash
 show spanning-tree vlan 12
 show spanning-tree vlan 22
@@ -87,7 +195,7 @@ show spanning-tree vlan 52
 
 ###Area de Infraestructura
 
-## Configuración del Área de estructura**
+#### **Configuración del Área de estructura**
 
 ### **MSW8**
 ```bash
@@ -117,7 +225,8 @@ spanning-tree vlan 32 root primary
 spanning-tree vlan 42 root primary
 exit
 ```
-SW6
+
+#### **SW6**
 ```
 configure terminal
 vtp domain G14_technet
@@ -139,7 +248,8 @@ switchport mode access
 switchport access vlan 22
 exit
 ```
-SW8
+
+#### **SW8**
 ```
 configure terminal
 vtp domain G14_technet
@@ -163,7 +273,6 @@ exit
 ```
 # 🔧 Configuración de la Red - Área de Desarrollo 💻
 
-## 🛠 Paso 1: Configurar VTP en los Switches
 ### **Modo Cliente:** `SW8, SW9, SW10, MSW11`
 ```bash
 enable
@@ -173,7 +282,8 @@ vtp mode client
 vtp password secure2025
 exit
 ```
-configurar VLANS
+
+#### **configurar VLANS**
 ```bash
 enable
 configure terminal
@@ -188,7 +298,8 @@ name Seguridad
 exit
 show vlan brief
 ```
-Configurar Trunking
+
+#### **Configurar Trunking**
 ```bash
 enable
 configure terminal
@@ -199,7 +310,8 @@ switchport trunk allowed vlan 12,22,32,42
 exit
 show interfaces trunk
 ```
-Configurar EtherChannel (LACP)
+
+#### **Configurar EtherChannel (LACP)**
 ```bash
 enable
 configure terminal
@@ -213,7 +325,8 @@ switchport trunk allowed vlan 12,22,32,42
 exit
 show etherchannel summary
 ```
-Configurar STP (PVST)
+
+#### **Configurar STP (PVST)**
 ```bash
 enable
 configure terminal
@@ -221,7 +334,8 @@ spanning-tree mode pvst
 spanning-tree vlan 12,22,32,42 root primary
 exit
 ```
-Verificar STP
+
+#### **Verificar STP**
 ```bash
 show spanning-tree vlan 12
 show spanning-tree vlan 22
@@ -241,7 +355,8 @@ vtp password secure2025
 exit
 show vtp status
 ```
-Configurar VLANs
+
+#### **Configurar VLANs**
 ```bash
 enable
 configure terminal
@@ -256,8 +371,9 @@ name Seguridad
 exit
 show vlan brief
 ```
-Configurar Trunking en los switches
-SW11
+
+### **Configurar Trunking en los switches**
+#### **SW11**
 ```bash
 enable
 configure terminal
@@ -267,7 +383,8 @@ switchport trunk encapsulation dot1q
 switchport trunk allowed vlan 12,22,32,42
 exit
 ```
-SW12
+
+#### **SW12**
 ```bash
 enable
 configure terminal
@@ -277,7 +394,8 @@ switchport trunk encapsulation dot1q
 switchport trunk allowed vlan 12,22,32,42
 exit
 ```
-SW13
+
+#### **SW13**
 ```bash
 enable
 configure terminal
@@ -288,8 +406,9 @@ switchport trunk allowed vlan 12,22,32,42
 exit
 show interfaces trunk
 ```
-Configurar EtherChannel
-Configuración en SW11 y SW12 LACP
+
+### Configurar EtherChannel
+#### **Configuración en SW11 y SW12 (LACP)**
 ```bash
 enable
 configure terminal
@@ -303,7 +422,8 @@ switchport trunk allowed vlan 12,22,32,42
 exit
 show etherchannel summary
 ```
-Configurar STP (PVST/RSTP)
+
+#### **Configurar STP (PVST/RSTP)**
 ```bash
 enable
 configure terminal
@@ -311,7 +431,7 @@ spanning-tree mode pvst
 spanning-tree vlan 12,22,32,42 root primary
 exit
 ```
-Verificar STP
+#### **Verificar STP**
 ```bash
 show spanning-tree vlan 12
 show spanning-tree vlan 22
