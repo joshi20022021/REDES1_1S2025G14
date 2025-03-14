@@ -87,7 +87,7 @@ show spanning-tree vlan 52
 
 ###Area de Infraestructura
 
-## Configuración del Área de la estructura**
+## Configuración del Área de estructura**
 
 ### **MSW8**
 ```bash
@@ -161,3 +161,161 @@ switchport mode access
 switchport access vlan 22
 exit
 ```
+# 🔧 Configuración de la Red - Área de Desarrollo 💻
+
+## 🛠 Paso 1: Configurar VTP en los Switches
+### **Modo Cliente:** `SW8, SW9, SW10, MSW11`
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode client
+vtp password secure2025
+exit
+```
+configurar VLANS
+```bash
+enable
+configure terminal
+vlan 12
+name Ventas
+vlan 22
+name Soporte
+vlan 32
+name Gerencia
+vlan 42
+name Seguridad
+exit
+show vlan brief
+```
+Configurar Trunking
+```bash
+enable
+configure terminal
+interface range FastEthernet0/3 - 5
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+show interfaces trunk
+```
+Configurar EtherChannel (LACP)
+```bash
+enable
+configure terminal
+interface range FastEthernet0/3 - 5
+channel-group 14 mode active
+exit
+interface port-channel 14
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+show etherchannel summary
+```
+Configurar STP (PVST)
+```bash
+enable
+configure terminal
+spanning-tree mode pvst
+spanning-tree vlan 12,22,32,42 root primary
+exit
+```
+Verificar STP
+```bash
+show spanning-tree vlan 12
+show spanning-tree vlan 22
+show spanning-tree vlan 32
+show spanning-tree vlan 42
+```
+
+## 🏢 **Área de Gerencia**
+### 🛠 Paso 1: Configurar VTP en los Switches
+#### **Modo Cliente:** `SW11, SW12, SW13`
+```bash
+enable
+configure terminal
+vtp domain G14_technet
+vtp mode client
+vtp password secure2025
+exit
+show vtp status
+```
+Configurar VLANs
+```bash
+enable
+configure terminal
+vlan 12
+name Ventas
+vlan 22
+name Soporte
+vlan 32
+name Gerencia
+vlan 42
+name Seguridad
+exit
+show vlan brief
+```
+Configurar Trunking en los switches
+SW11
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1, FastEthernet0/2
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+```
+SW12
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1, FastEthernet0/2
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+```
+SW13
+```bash
+enable
+configure terminal
+interface range FastEthernet0/1, FastEthernet0/2
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+show interfaces trunk
+```
+Configurar EtherChannel
+Configuración en SW11 y SW12 LACP
+```bash
+enable
+configure terminal
+interface range FastEthernet0/3 - 5
+channel-group 14 mode active
+exit
+interface port-channel 14
+switchport mode trunk
+switchport trunk encapsulation dot1q
+switchport trunk allowed vlan 12,22,32,42
+exit
+show etherchannel summary
+```
+Configurar STP (PVST/RSTP)
+```bash
+enable
+configure terminal
+spanning-tree mode pvst
+spanning-tree vlan 12,22,32,42 root primary
+exit
+```
+Verificar STP
+```bash
+show spanning-tree vlan 12
+show spanning-tree vlan 22
+show spanning-tree vlan 32
+show spanning-tree vlan 42
+```
+
