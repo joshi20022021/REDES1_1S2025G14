@@ -2,7 +2,7 @@
 ### 🏛 Facultad de Ingeniería - Escuela de Ciencias y Sistemas  
 ### 🖥 Laboratorio Redes De Computadoras 1, Sección: N  
 
-## 👤 Andrés Alejandro Agosto Méndez**  
+## 👤 Nombre: **Andrés Alejandro Agosto Méndez**  
 ## 🎓 Carnet: **202113580**  
 ## 👤 Nombre: **Edgar Josías Cán Ajquejay**  
 ## 🎓 Carnet: **202112012** 
@@ -37,19 +37,19 @@
 # 📸 Capturas de la implementacion de las topologias
 ## 🌐 Protocolos VTP
 ### AREA CENTRAL
-![](CAPTURAS/VTPSERVIDOR.png)
+![](img/AREACENTRAL.jpg)
 
-### AREA DE ADMINISTRACION
-![](CAPTURAS/VTPTRANSPARENTE.png)
+### AREA DE ADMINISTRACION/RECEPCION
+![](img/AREARECEPCION.jpg)
 
 ### AREA DE DESARROLLO 
-![](CAPTURAS/VTPCLIENTE01.png)
+![](img/AREADESARROLLO.jpg)
 
 ### AREA DE GERENCIA
-![](CAPTURAS/VTPCLIENTE02.png)
+![](img/AREAGERENCIA.jpg)
 
 ### AREA DE INFRAESTRUCTURA
-![](CAPTURAS/VTPCLIENTE02.png)
+![](img/AREAINFRAESTRUCTURA.jpg)
 
 ##Detalle de los comandos Usados
 
