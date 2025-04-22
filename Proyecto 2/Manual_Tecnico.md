@@ -9,6 +9,9 @@
 
 ## 🏥 **Proyecto 2**  
 
+### TOPOLOGIA FINAL DEL PROYECTO
+![](img/TOPOLOGIA_FINAL.png)
+
 # Configuración de la red CUNDECH
 
 ## 📋 CUNDECH – Tabla de Subredes
