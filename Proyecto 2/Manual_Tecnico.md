@@ -214,6 +214,98 @@ vtp mode client
 | Docentes    | 25               | 192.158.14.192/27     | 255.255.255.224      | 192.158.14.193     |
 | Seguridad   | 10               | 192.158.14.224/28     | 255.255.255.240      | 192.158.14.225     |
 
+
+## 🔧 Comandos de SW5
+```bash
+enable
+configure terminal
+
+vlan 12; name Estudiantes
+vlan 22; name Docentes
+vlan 32; name Seguridad
+vlan 42; name Biblioteca
+
+interface fa0/3; switchport mode access; switchport access vlan 12; no shutdown
+interface fa0/4; switchport mode access; switchport access vlan 22; no shutdown
+interface fa0/5; switchport mode access; switchport access vlan 32; no shutdown
+interface fa0/6; switchport mode access; switchport access vlan 42; no shutdown
+
+interface fa0/1-2
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+```
+
+## 🔧 Comandos en R4
+```bash
+enable
+configure terminal
+interface g0/1; no shutdown
+
+interface g0/1.12
+ encapsulation dot1Q 12
+ ip address 192.158.14.130 255.255.255.192
+ standby 12 ip 192.158.14.129
+ standby 12 priority 110
+ standby 12 preempt
+
+interface g0/1.22
+ encapsulation dot1Q 22
+ ip address 192.158.14.194 255.255.255.224
+ standby 22 ip 192.158.14.193
+ standby 22 priority 110
+ standby 22 preempt
+
+interface g0/1.32
+ encapsulation dot1Q 32
+ ip address 192.158.14.226 255.255.255.240
+ standby 32 ip 192.158.14.225
+ standby 32 priority 110
+ standby 32 preempt
+
+interface g0/1.42
+ encapsulation dot1Q 42
+ ip address 192.158.14.2 255.255.255.128
+ standby 42 ip 192.158.14.1
+ standby 42 priority 110
+ standby 42 preempt
+```
+
+## 🔧 Comandos en R5
+```bash
+enable
+configure terminal
+interface g0/1; no shutdown
+
+interface g0/1.12
+ encapsulation dot1Q 12
+ ip address 192.158.14.131 255.255.255.192
+ standby 12 ip 192.158.14.129
+ standby 12 priority 100
+ standby 12 preempt
+
+interface g0/1.22
+ encapsulation dot1Q 22
+ ip address 192.158.14.195 255.255.255.224
+ standby 22 ip 192.158.14.193
+ standby 22 priority 100
+ standby 22 preempt
+
+interface g0/1.32
+ encapsulation dot1Q 32
+ ip address 192.158.14.227 255.255.255.240
+ standby 32 ip 192.158.14.225
+ standby 32 priority 100
+ standby 32 preempt
+
+interface g0/1.42
+ encapsulation dot1Q 42
+ ip address 192.158.14.3 255.255.255.128
+ standby 42 ip 192.158.14.1
+ standby 42 priority 100
+ standby 42 preempt
+```
+
 ## 🖥️ CUM – Asignación de IPs
 
 | PC            | VLAN | IP                 | Máscara              | Gateway            |
@@ -244,4 +336,10 @@ vtp mode client
 | Docentes1     | 22   | 172.16.14.70     | 255.255.255.192      | 172.16.14.65      |
 | Docentes2     | 22   | 172.16.14.71     | 255.255.255.192      | 172.16.14.65      |
 | Seguridad4    | 32   | 172.16.14.132    | 255.255.255.224      | 172.16.14.129     |
+
+
+
+
+
+
 
