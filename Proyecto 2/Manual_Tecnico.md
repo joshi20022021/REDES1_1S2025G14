@@ -327,6 +327,160 @@ interface g0/1.42
 | Biblioteca  | 50               | 172.16.14.160/28   | 255.255.255.240      | 172.16.14.161     |
 
 
+
+## 🔧 COMANDOS PARA SW0, SW1, SW9
+
+```bash
+! SW0 (Docentes)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface fa0/2-3
+ switchport mode access
+ switchport access vlan 22
+interface fa0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+
+! SW1 (Estudiantes)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface fa0/2-3
+ switchport mode access
+ switchport access vlan 12
+interface fa0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+
+! SW9 (Seguridad)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface fa0/2
+ switchport mode access
+ switchport access vlan 32
+interface fa0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+```
+
+## COMANDOS PARA 🔧 MS0
+
+```bash
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode server
+vlan 12
+ name Estudiantes
+vlan 22
+ name Docentes
+vlan 32
+ name Seguridad
+vlan 42
+ name Biblioteca
+
+interface fa0/4
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+interface fa0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+interface fa0/5
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+interface fa0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+interface fa0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+```
+
+## COMANDOS PARA MS1/MS2 
+
+```bash
+! MS1 (Active)
+enable
+configure terminal
+ip routing
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface vlan 12
+ ip address 172.16.14.2 255.255.255.192
+ standby 12 ip 172.16.14.1
+ standby 12 priority 110
+ standby 12 preempt
+ no shutdown
+interface vlan 22
+ ip address 172.16.14.66 255.255.255.192
+ standby 22 ip 172.16.14.65
+ standby 22 priority 110
+ standby 22 preempt
+ no shutdown
+interface vlan 32
+ ip address 172.16.14.130 255.255.255.224
+ standby 32 ip 172.16.14.129
+ standby 32 priority 110
+ standby 32 preempt
+ no shutdown
+interface vlan 42
+ ip address 172.16.14.162 255.255.255.240
+ standby 42 ip 172.16.14.161
+ standby 42 priority 110
+ standby 42 preempt
+ no shutdown
+
+! MS2 (Standby)
+enable
+configure terminal
+ip routing
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface vlan 12
+ ip address 172.16.14.3 255.255.255.192
+ standby 12 ip 172.16.14.1
+ standby 12 priority 100
+ standby 12 preempt
+ no shutdown
+interface vlan 22
+ ip address 172.16.14.67 255.255.255.192
+ standby 22 ip 172.16.14.65
+ standby 22 priority 100
+ standby 22 preempt
+ no shutdown
+interface vlan 32
+ ip address 172.16.14.131 255.255.255.224
+ standby 32 ip 172.16.14.129
+ standby 32 priority 100
+ standby 32 preempt
+ no shutdown
+interface vlan 42
+ ip address 172.16.14.163 255.255.255.240
+ standby 42 ip 172.16.14.161
+ standby 42 priority 100
+ standby 42 preempt
+ no shutdown
+```
+
 ## 🖥️ CUNOC – Asignación de IPs
 
 | PC            | VLAN | IP               | Máscara              | Gateway           |
