@@ -103,3 +103,102 @@ interface fa0/1
  switchport trunk allowed vlan 12,22,32,42
  no shutdown
 ```
+
+## 🖥️ SWITCH SW6
+
+```bash
+enable
+configure terminal
+
+! Configuración VTP
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+
+! Puertos de acceso
+interface fa0/5
+ switchport mode access
+ switchport access vlan 32
+ no shutdown
+
+interface fa0/4
+ switchport mode access
+ switchport access vlan 42
+ no shutdown
+
+interface fa0/3
+ switchport mode access
+ switchport access vlan 42
+ no shutdown
+
+! Troncales
+interface fa0/2
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+
+interface fa0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+```
+
+## 🖥️ SWITCH MULTICAPA MS8
+
+```bash
+enable
+configure terminal
+
+! Habilitar ruteo
+ip routing
+
+! Configurar VLANs virtuales (puertas de enlace)
+interface vlan 12
+ ip address 192.168.14.129 255.255.255.192
+ no shutdown
+
+interface vlan 22
+ ip address 192.168.14.193 255.255.255.224
+ no shutdown
+
+interface vlan 32
+ ip address 192.168.14.225 255.255.255.248
+ no shutdown
+
+interface vlan 42
+ ip address 192.168.14.1 255.255.255.128
+ no shutdown
+
+! Troncales hacia otros switches
+interface fa0/2
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+
+interface fa0/3
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+
+interface fa0/4
+ switchport mode trunk
+ switchport trunk allowed vlan 12,22,32,42
+ no shutdown
+
+! VTP como cliente
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+```
+
+## 🖥️ PCs y direcciones IP 
+
+| PC           | IP Address       | Gateway        | Máscara          |
+|--------------|------------------|----------------|------------------|
+| Seguridad2   | 192.168.14.226   | 192.168.14.225 | 255.255.255.248  |
+| Biblioteca3  | 192.168.14.2     | 192.168.14.1   | 255.255.255.128  |
+| Biblioteca4  | 192.168.14.3     | 192.168.14.1   | 255.255.255.128  |
+| Estudiantes6 | 192.168.14.130   | 192.168.14.129 | 255.255.255.192  |
+| Estudiantes7 | 192.168.14.131   | 192.168.14.129 | 255.255.255.192  |
+| Docentes6    | 192.168.14.194   | 192.168.14.193 | 255.255.255.224  |
+| Docentes7    | 192.168.14.195   | 192.168.14.193 | 255.255.255.224  |
