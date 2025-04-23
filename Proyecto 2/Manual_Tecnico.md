@@ -500,3 +500,80 @@ interface vlan 42
 
 
 
+## 📋 CUNOROC – Tabla de Subredes
+
+| VLAN        | Hosts requeridos | Subred             | Máscara              | Gateway           |
+|-------------|------------------|--------------------|----------------------|-------------------|
+| Estudiantes | 45               | 192.148.14.128/26     | 255.255.255.192      | 192.148.14.129       |
+| Docentes    | 25               | 192.148.14.192/27    | 255.255.255.224     | 192.148.14.193      |
+| Seguridad   | 10                | 192.148.14.224/28   | 255.255.255.240    | 192.148.14.225     |
+| Biblioteca  | 75               | 192.148.14.0/25   | 255.255.255.128     | 192.148.14.1     |
+
+
+
+## 🔧 COMANDOS PARA SW2, SW3, SW4
+
+```bash
+! SW2 (Docentes)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client 
+interface fa0/3
+ switchport mode access
+ switchport access vlan 22
+interface fa0/2
+ switchport mode trunk
+
+! SW3 (Estudiantes)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode server
+
+vlan 12
+name Estudiantes
+vlan 22
+name Docentes
+vlan 32
+name Seguridad
+vlan 42
+name Biblioteca
+
+interface fa0/3
+ switchport mode access
+ switchport access vlan 12
+interface range fa0/1-2
+ switchport mode trunk
+
+! SW4 (Seguridad, Biblioteca)
+enable
+configure terminal
+vtp domain Grupo14
+vtp password usac2025
+vtp mode client
+interface fa0/2
+ switchport mode access
+ switchport access vlan 42
+interface fa0/3
+ switchport mode access
+ switchport access vlan 32
+
+interface fa0/1
+ switchport mode trunk
+
+```
+
+
+## 🖥️ CUNOROC – Asignación de IPs
+
+| PC            | VLAN | IP               | Máscara              | Gateway           |
+|---------------|------|------------------|----------------------|-------------------|
+| Seguridad3  | 32   |192.148.14.226      | 255.255.255.240      | 192.148.14.225      |
+| Biblioteca1  | 42   | 192.148.14.2      | 255.255.255.128      | 192.148.14.1      |
+| Estudiantes3     | 12   | 192.148.14.130     | 255.255.255.192      | 192.148.14.129    |
+| Docentes3     | 22   | 192.148.14.194     | 255.255.255.224      | 192.148.14.193      |
+
+
