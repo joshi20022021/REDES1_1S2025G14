@@ -577,3 +577,54 @@ interface fa0/1
 | Docentes3     | 22   | 192.148.14.194     | 255.255.255.224      | 192.148.14.193      |
 
 
+## 📋 Central – Asignación de IPs
+
+| VLAN        | ID Vlan | Subred             | Máscara              | 
+|-------------|------------------|--------------------|----------------------|
+| Server0 | 52               | 192.148.14.128/26     | 255.255.255.192      | 
+| Server1    | 25               | 192.148.14.192/27    | 255.255.255.224     | 
+| Server2   | 10                | 192.148.14.224/28   | 255.255.255.240    |
+
+
+
+``` bash
+
+! Switch0 (Server0,Server1,Server2)
+vlan 52
+ name Server0
+vlan 62
+ name Server1
+vlan 72
+ name Server2
+
+! trunk hacia R7
+interface fa0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+no shut
+
+! configurar acceso
+interface fa0/2
+switchport mode access
+switchport access vlan 72
+spanning-tree portfast
+
+interface fa0/4
+switchport mode access
+switchport access vlan 52
+spanning-tree portfast
+
+interface fa0/3
+switchport mode access
+switchport access vlan 62
+spanning-tree portfast
+
+
+! Configuración router
+
+!hacia MS5(backbone)
+interface g0/0
+ ip address 10.0.0.6 255.255.255.252
+ no shut
+```
+
