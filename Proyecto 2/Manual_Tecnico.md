@@ -579,11 +579,11 @@ interface fa0/1
 
 ## 📋 Central – Asignación de IPs
 
-| VLAN        | ID Vlan | Subred             | Máscara              | 
+| VLAN        | VLAN | subred             | Máscara              | 
 |-------------|------------------|--------------------|----------------------|
-| Server0 | 52               | 192.148.14.128/26     | 255.255.255.192      | 
-| Server1    | 25               | 192.148.14.192/27    | 255.255.255.224     | 
-| Server2   | 10                | 192.148.14.224/28   | 255.255.255.240    |
+| Server0 | 52               | 192.120.14.128/26     | 255.255.255.192      | 
+| Server1    | 25               | 192.121.14.192/27    | 255.255.255.224     | 
+| Server2   | 10                | 192.122.14.224/28   | 255.255.255.240    |
 
 
 
@@ -620,11 +620,36 @@ switchport access vlan 62
 spanning-tree portfast
 
 
-! Configuración router
+! Configuración R7
 
-!hacia MS5(backbone)
-interface g0/0
- ip address 10.0.0.6 255.255.255.252
+interface g0/0 // !hacia MS5(backbone)
+ ip address 10.0.0.6 255.255.255.252 // para dos dispositivos la ip 10.0.0.6/30
  no shut
+
+// encender interfaz
+interface g0/1
+no shut
+
+!--- Subinterface para Server0 (VLAN 52)
+interface g0/1.52
+encapsulation dot1Q 52
+ip address 192.120.14.1 255.255.255.0
+no shutdown
+
+!--- Subinterface para Server1 (VLAN 62)
+interface g0/1.62
+encapsulation dot1Q 62
+ip address 192.121.14.1 255.255.255.0
+no shutdown
+
+!--- Subinterface para Server2 (VLAN 72)
+interface g0/1.72
+encapsulation dot1Q 72
+ip address 192.122.14.1 255.255.255.0
+no shutdown
+
+end
+
+
 ```
 
