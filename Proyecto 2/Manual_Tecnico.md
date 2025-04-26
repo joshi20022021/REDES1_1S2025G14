@@ -668,4 +668,321 @@ end
 
 
 ```
+# Configuración de RIP
+``` bash
+R1> enable
+R1# configure terminal
+R1(config)# interface GigabitEthernet0/0
+R1(config-if)# ip address 10.10.10.10 255.255.255.252
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface Serial0/0/0
+R1(config-if)# ip address 10.10.10.13 255.255.255.252
+R1(config-if)# clock rate 64000
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# interface Serial0/0/1
+R1(config-if)# ip address 10.10.10.17 255.255.255.252
+R1(config-if)# clock rate 64000
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# router rip
+R1(config-router)# version 2
+R1(config-router)# no auto-summary
+R1(config-router)# network 10.10.10.8
+R1(config-router)# network 10.10.10.12
+R1(config-router)# network 10.10.10.16
+R1(config-router)# exit
+
+
+R0> enable
+R0# configure terminal
+R0(config)# interface Serial0/0/0
+R0(config-if)# ip address 10.10.10.18 255.255.255.252
+R0(config-if)# no shutdown
+R0(config-if)# exit
+R0(config)# interface Serial0/0/1
+R0(config-if)# ip address 10.10.10.21 255.255.255.252
+R0(config-if)# no shutdown
+R0(config-if)# exit
+R0(config)# interface GigabitEthernet0/0
+R0(config-if)# ip address 192.148.14.1 255.255.255.128
+R0(config-if)# no shutdown
+R0(config-if)# exit
+R0(config)# router rip
+R0(config-router)# version 2
+R0(config-router)# no auto-summary
+R0(config-router)# network 10.10.10.16
+R0(config-router)# network 10.10.10.20
+R0(config-router)# network 192.148.14.0
+R0(config-router)# exit
+
+```
+
+# Configuración de BGRP
+``` bash
+MS8> enable
+MS8# configure terminal
+MS8(config)# ip routing
+MS8(config)# interface FastEthernet0/1
+MS8(config-if)# no switchport
+MS8(config-if)# ip address 10.1.0.1 255.255.255.252
+MS8(config-if)# no shutdown
+MS8(config-if)# exit
+MS8(config)# router bgp 65008
+MS8(config-router)# bgp log-neighbor-changes
+MS8(config-router)# neighbor 10.1.0.2 remote-as 65010
+MS8(config-router)# network 192.168.14.0 mask 255.255.255.128
+MS8(config-router)# network 10.1.0.0 mask 255.255.255.252
+MS8(config-router)# exit
+
+R10> enable
+R10# configure terminal
+R10(config)# interface GigabitEthernet0/0
+R10(config-if)# ip address 10.1.0.5 255.255.255.252
+R10(config-if)# no shutdown
+R10(config-if)# exit
+R10(config)# interface GigabitEthernet0/1
+R10(config-if)# ip address 10.1.0.2 255.255.255.252
+R10(config-if)# no shutdown
+R10(config-if)# exit
+R10(config)# router bgp 65010
+R10(config-router)# bgp log-neighbor-changes
+R10(config-router)# neighbor 10.1.0.1 remote-as 65008
+R10(config-router)# neighbor 10.1.0.6 remote-as 65009
+R10(config-router)# network 10.1.0.0 mask 255.255.255.252
+R10(config-router)# network 10.1.0.4 mask 255.255.255.252
+R10(config-router)# exit
+
+R9> enable
+R9# configure terminal
+R9(config)# interface GigabitEthernet0/0
+R9(config-if)# ip address 10.1.0.9 255.255.255.252
+R9(config-if)# no shutdown
+R9(config-if)# exit
+R9(config)# interface GigabitEthernet0/1
+R9(config-if)# ip address 10.1.0.6 255.255.255.252
+R9(config-if)# no shutdown
+R9(config-if)# exit
+R9(config)# router bgp 65009
+R9(config-router)# bgp log-neighbor-changes
+R9(config-router)# neighbor 10.1.0.5 remote-as 65010
+R9(config-router)# neighbor 10.1.0.10 remote-as 65007
+R9(config-router)# network 10.1.0.4 mask 255.255.255.252
+R9(config-router)# network 10.1.0.8 mask 255.255.255.252
+R9(config-router)# exit
+
+MS7> enable
+MS7# configure terminal
+MS7(config)# ip routing
+MS7(config)# interface FastEthernet0/1
+MS7(config-if)# no switchport
+MS7(config-if)# ip address 10.1.0.17 255.255.255.252
+MS7(config-if)# no shutdown
+MS7(config-if)# exit
+MS7(config)# interface FastEthernet0/4
+MS7(config-if)# no switchport
+MS7(config-if)# ip address 10.1.0.21 255.255.255.252
+MS7(config-if)# no shutdown
+MS7(config-if)# exit
+MS7(config)# router bgp 65007
+MS7(config-router)# bgp log-neighbor-changes
+MS7(config-router)# neighbor 10.1.0.9 remote-as 65009
+MS7(config-router)# exit
+
+```
+
+# Configuración de OSPF
+
+``` bash
+R2> enable
+R2# configure terminal
+R2(config)# interface GigabitEthernet0/0
+R2(config-if)# ip address 10.10.0.1 255.255.255.252
+R2(config-if)# no shutdown
+R2(config-if)# exit
+R2(config)# router ospf 1
+R2(config-router)# router-id 2.2.2.2
+R2(config-router)# network 10.10.0.0 0.0.0.3 area 0
+R2(config-router)# redistribute rip subnets
+R2(config-router)# exit
+
+R3> enable
+R3# configure terminal
+R3(config)# interface GigabitEthernet0/0
+R3(config-if)# ip address 10.10.0.2 255.255.255.252
+R3(config-if)# no shutdown
+R3(config-if)# exit
+R3(config)# interface GigabitEthernet0/1
+R3(config-if)# ip address 10.10.0.5 255.255.255.252
+R3(config-if)# no shutdown
+R3(config-if)# exit
+R3(config)# router ospf 1
+R3(config-router)# router-id 3.3.3.3
+R3(config-router)# network 10.10.0.0 0.0.0.3 area 0
+R3(config-router)# network 10.10.0.4 0.0.0.3 area 0
+R3(config-router)# exit
+
+MS4> enable
+MS4# configure terminal
+MS4(config)# ip routing
+MS4(config)# interface FastEthernet0/1
+MS4(config-if)# no switchport
+MS4(config-if)# ip address 10.10.0.6 255.255.255.252
+MS4(config-if)# no shutdown
+MS4(config-if)# exit
+MS4(config)# interface range FastEthernet0/5 - 7
+MS4(config-if-range)# channel-group 1 mode active
+MS4(config-if-range)# exit
+MS4(config)# interface Port-channel1
+MS4(config-if)# no switchport
+MS4(config-if)# ip address 10.10.0.9 255.255.255.252
+MS4(config-if)# no shutdown
+MS4(config-if)# exit
+MS4(config)# interface range FastEthernet0/2 - 4
+MS4(config-if-range)# channel-group 2 mode active
+MS4(config-if-range)# exit
+MS4(config)# interface Port-channel2
+MS4(config-if)# no switchport
+MS4(config-if)# ip address 10.10.0.13 255.255.255.252
+MS4(config-if)# no shutdown
+MS4(config-if)# exit
+MS4(config)# router ospf 1
+MS4(config-router)# router-id 4.4.4.4
+MS4(config-router)# network 10.10.0.4 0.0.0.3 area 0
+MS4(config-router)# network 10.10.0.8 0.0.0.3 area 0
+MS4(config-router)# network 10.10.0.12 0.0.0.3 area 0
+MS4(config-router)# exit
+
+MS5> enable
+MS5# configure terminal
+MS5(config)# ip routing
+MS5(config)# interface range FastEthernet0/1 - 3
+MS5(config-if-range)# channel-group 1 mode active
+MS5(config-if-range)# exit
+MS5(config)# interface Port-channel1
+MS5(config-if)# no switchport
+MS5(config-if)# ip address 10.10.0.10 255.255.255.252
+MS5(config-if)# no shutdown
+MS5(config-if)# exit
+MS5(config)# interface range FastEthernet0/4 - 6
+MS5(config-if-range)# channel-group 4 mode active
+MS5(config-if-range)# exit
+MS5(config)# interface Port-channel4
+MS5(config-if)# no switchport
+MS5(config-if)# ip address 10.10.0.21 255.255.255.252
+MS5(config-if)# no shutdown
+MS5(config-if)# exit
+MS5(config)# interface FastEthernet0/7
+MS5(config-if)# no switchport
+MS5(config-if)# ip address 10.10.0.25 255.255.255.252
+MS5(config-if)# no shutdown
+MS5(config-if)# exit
+MS5(config)# ip route 192.120.14.0 255.255.255.0 10.10.0.26
+MS5(config)# router ospf 1
+MS5(config-router)# router-id 5.5.5.5
+MS5(config-router)# network 10.10.0.8 0.0.0.3 area 0
+MS5(config-router)# network 10.10.0.20 0.0.0.3 area 0
+MS5(config-router)# network 10.10.0.24 0.0.0.3 area 0
+MS5(config-router)# redistribute static subnets
+MS5(config-router)# exit
+
+MS6> enable
+MS6# configure terminal
+MS6(config)# ip routing
+MS6(config)# interface range FastEthernet0/1 - 3
+MS6(config-if-range)# channel-group 2 mode active
+MS6(config-if-range)# exit
+MS6(config)# interface Port-channel2
+MS6(config-if)# no switchport
+MS6(config-if)# ip address 10.10.0.14 255.255.255.252
+MS6(config-if)# no shutdown
+MS6(config-if)# exit
+MS6(config)# interface range FastEthernet0/4 - 6
+MS6(config-if-range)# channel-group 3 mode active
+MS6(config-if-range)# exit
+MS6(config)# interface Port-channel3
+MS6(config-if)# no switchport
+MS6(config-if)# ip address 10.10.0.17 255.255.255.252
+MS6(config-if)# no shutdown
+MS6(config-if)# exit
+MS6(config)# interface FastEthernet0/7
+MS6(config-if)# no switchport
+MS6(config-if)# ip address 10.10.0.29 255.255.255.252
+MS6(config-if)# no shutdown
+MS6(config-if)# exit
+MS6(config)# interface FastEthernet0/8
+MS6(config-if)# no switchport
+MS6(config-if)# ip address 10.10.0.33 255.255.255.252
+MS6(config-if)# no shutdown
+MS6(config-if)# exit
+MS6(config)# router ospf 1
+MS6(config-router)# router-id 6.6.6.6
+MS6(config-router)# network 10.10.0.12 0.0.0.3 area 0
+MS6(config-router)# network 10.10.0.16 0.0.0.3 area 0
+MS6(config-router)# network 10.10.0.28 0.0.0.3 area 0
+MS6(config-router)# network 10.10.0.32 0.0.0.3 area 0
+MS6(config-router)# redistribute eigrp 100 subnets
+MS6(config-router)# exit
+
+MS7> enable
+MS7# configure terminal
+MS7(config)# ip routing
+MS7(config)# interface range FastEthernet0/1 - 3
+MS7(config-if-range)# channel-group 3 mode active
+MS7(config-if-range)# exit
+MS7(config)# interface Port-channel3
+MS7(config-if)# no switchport
+MS7(config-if)# ip address 10.10.0.18 255.255.255.252
+MS7(config-if)# no shutdown
+MS7(config-if)# exit
+MS7(config)# interface range FastEthernet0/4 - 6
+MS7(config-if-range)# channel-group 4 mode active
+MS7(config-if-range)# exit
+MS7(config)# interface Port-channel4
+MS7(config-if)# no switchport
+MS7(config-if)# ip address 10.10.0.22 255.255.255.252
+MS7(config-if)# no shutdown
+MS7(config-if)# exit
+MS7(config)# router ospf 1
+MS7(config-router)# router-id 7.7.7.7
+MS7(config-router)# network 10.10.0.16 0.0.0.3 area 0
+MS7(config-router)# network 10.10.0.20 0.0.0.3 area 0
+MS7(config-router)# exit
+
+R7> enable
+R7# configure terminal
+R7(config)# interface GigabitEthernet0/2
+R7(config-if)# ip address 10.10.0.26 255.255.255.252
+R7(config-if)# no shutdown
+R7(config-if)# exit
+R7(config)# router ospf 1
+R7(config-router)# router-id 7.7.7.1
+R7(config-router)# network 10.10.0.24 0.0.0.3 area 0
+R7(config-router)# exit
+
+R4> enable
+R4# configure terminal
+R4(config)# interface GigabitEthernet0/0
+R4(config-if)# ip address 10.10.0.30 255.255.255.252
+R4(config-if)# no shutdown
+R4(config-if)# exit
+R4(config)# router ospf 1
+R4(config-router)# router-id 4.4.4.1
+R4(config-router)# network 10.10.0.28 0.0.0.3 area 0
+R4(config-router)# exit
+
+R5> enable
+R5# configure terminal
+R5(config)# interface GigabitEthernet0/0
+R5(config-if)# ip address 10.10.0.34 255.255.255.252
+R5(config-if)# no shutdown
+R5(config-if)# exit
+R5(config)# router ospf 1
+R5(config-router)# router-id 5.5.5.1
+R5(config-router)# network 10.10.0.32 0.0.0.3 area 0
+R5(config-router)# exit
+
+```
+
 
