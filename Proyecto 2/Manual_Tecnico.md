@@ -12,6 +12,32 @@
 ### TOPOLOGIA FINAL DEL PROYECTO
 ![](img/TOPOLOGIA_FINAL.png)
 
+## 1. Resumen de Direcciones IP y VLAN
+
+| Sede     | VLAN | Hosts requeridos | Subred               | Máscara           | Hosts útiles | Justificación |
+|----------|------|------------------|----------------------|-------------------|--------------|---------------|
+| CUNDECH  | 42   | 100              | 192.168.14.0/25      | 255.255.255.128   | 126          | Biblioteca necesita ~100; /25 provee 126 hosts útiles. |
+| CUNDECH  | 12   | 50               | 192.168.14.128/26    | 255.255.255.192   | 62           | Estudiantes necesita 50; /26 provee 62 hosts útiles. |
+| CUNDECH  | 22   | 20               | 192.168.14.192/27    | 255.255.255.224   | 30           | Docentes necesita 20; /27 provee 30 hosts útiles. |
+| CUNDECH  | 32   | 5                | 192.168.14.224/29    | 255.255.255.248   | 6            | Seguridad necesita 5; /29 provee 6 hosts útiles. |
+| CUNOROC  | 42   | 75               | 192.148.14.0/25      | 255.255.255.128   | 126          | Biblioteca necesita 75; /25 provee 126 hosts útiles. |
+| CUNOROC  | 12   | 45               | 192.148.14.128/26    | 255.255.255.192   | 62           | Estudiantes necesita 45; /26 provee 62 hosts útiles. |
+| CUNOROC  | 22   | 25               | 192.148.14.192/27    | 255.255.255.224   | 30           | Docentes necesita 25; /27 provee 30 hosts útiles. |
+| CUNOROC  | 32   | 10               | 192.148.14.224/28    | 255.255.255.240   | 14           | Seguridad necesita 10; /28 provee 14 hosts útiles. |
+| CUNOC    | 12   | 60               | 172.16.14.0/26       | 255.255.255.192   | 62           | Estudiantes necesita 60; /26 provee 62 hosts útiles. |
+| CUNOC    | 42   | 50               | 172.16.14.64/26      | 255.255.255.192   | 62           | Biblioteca necesita 50; /26 provee 62 hosts útiles. |
+| CUNOC    | 22   | 35               | 172.16.14.128/26     | 255.255.255.192   | 62           | Docentes necesita 35; /26 provee 62 hosts útiles. |
+| CUNOC    | 32   | 5                | 172.16.14.192/29     | 255.255.255.248   | 6            | Seguridad necesita 5; /29 provee 6 hosts útiles. |
+| CUM      | 42   | 75               | 192.158.14.0/25      | 255.255.255.128   | 126          | Biblioteca necesita 75; /25 provee 126 hosts útiles. |
+| CUM      | 12   | 45               | 192.158.14.128/26    | 255.255.255.192   | 62           | Estudiantes necesita 45; /26 provee 62 hosts útiles. |
+| CUM      | 22   | 25               | 192.158.14.192/27    | 255.255.255.224   | 30           | Docentes necesita 25; /27 provee 30 hosts útiles. |
+| CUM      | 32   | 10               | 192.158.14.224/28    | 255.255.255.240   | 14           | Seguridad necesita 10; /28 provee 14 hosts útiles. |
+| Central  | 52   | 60               | 192.122.14.128/26    | 255.255.255.192   | 62           | Server0 necesita 60; /26 provee 62 hosts útiles. |
+| Central  | 62   | 35               | 192.122.14.192/27    | 255.255.255.224   | 30           | Server1 necesita 35; /27 provee 30 hosts útiles. |
+| Central  | 72   | 5                | 192.122.14.224/28    | 255.255.255.240   | 14           | Server2 necesita 5; /28 provee 14 hosts útiles. |
+
+---
+
 # Configuración de la red CUNDECH
 
 ![](img/CUNDECH.png)
@@ -668,6 +694,27 @@ end
 
 
 ```
+
+## 2. Subredes del Backbone
+
+| Protocolo | Enlace                  | Subred           | Máscara             | Hosts requeridos | Hosts útiles | Justificación |
+|-----------|-------------------------|------------------|----------------------|------------------|--------------|----------------|
+| RIP       | MS3–R1                  | 10.10.10.8/30    | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| RIP       | R1–R2                   | 10.10.10.12/30   | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| RIP       | R1–R0                   | 10.10.10.16/30   | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| BGP       | MS8–R10                 | 10.1.0.0/30      | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| BGP       | R10–R9                  | 10.1.0.4/30      | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| BGP       | R9–MS7                  | 10.1.0.8/30      | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| OSPF      | R2–R3                   | 10.10.0.0/30     | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| OSPF      | R3–MS4                  | 10.10.0.4/30     | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| OSPF      | MS4–MS5 (Port-Channel1) | 10.10.0.8/30     | 255.255.255.252      | 2                | 2            | EtherChannel entre switches. |
+| OSPF      | MS4–MS6 (Port-Channel2) | 10.10.0.12/30    | 255.255.255.252      | 2                | 2            | EtherChannel entre switches. |
+| OSPF      | MS6–MS7 (Port-Channel3) | 10.10.0.16/30    | 255.255.255.252      | 2                | 2            | EtherChannel entre switches. |
+| OSPF      | MS5–MS7 (Port-Channel4) | 10.10.0.20/30    | 255.255.255.252      | 2                | 2            | EtherChannel entre switches. |
+| OSPF      | MS5–R7                  | 10.10.0.24/30    | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| OSPF      | MS6–R4                  | 10.10.0.28/30    | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+| OSPF      | MS6–R5                  | 10.10.0.32/30    | 255.255.255.252      | 2                | 2            | Enlace punto a punto. |
+
 # Configuración de RIP
 ``` bash
 R1> enable
