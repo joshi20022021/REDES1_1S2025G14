@@ -14,7 +14,10 @@
 
 # Configuración de la red CUNDECH
 
+![](img/CUNDECH.png)
+
 ## 📋 CUNDECH – Tabla de Subredes
+
 
 | Área         | VLAN | Subred            | Gateway IP      |
 |--------------|------|-------------------|-----------------|
@@ -208,6 +211,10 @@ vtp mode client
 
 ---
 
+# Configuración de la red CUM
+
+![](img/CUM.png)
+
 ## 📋 CUM – Tabla de Subredes
 
 | VLAN        | Hosts requeridos | Subred               | Máscara              | Gateway            |
@@ -319,6 +326,10 @@ interface g0/1.42
 | Seguridad1    | 32   | 192.158.14.228     | 255.255.255.240      | 192.158.14.225     |
 
 ---
+
+# Configuración de la red CUNOC
+
+![](img/CUNOC.png)
 
 ## 📋 CUNOC – Tabla de Subredes
 
@@ -496,9 +507,9 @@ interface vlan 42
 
 
 
+# Configuración de la red CUNOROC
 
-
-
+![](img/CUNOROC.png)
 
 ## 📋 CUNOROC – Tabla de Subredes
 
@@ -575,6 +586,11 @@ interface fa0/1
 | Biblioteca1  | 42   | 192.148.14.2      | 255.255.255.128      | 192.148.14.1      |
 | Estudiantes3     | 12   | 192.148.14.130     | 255.255.255.192      | 192.148.14.129    |
 | Docentes3     | 22   | 192.148.14.194     | 255.255.255.224      | 192.148.14.193      |
+
+
+# Configuración de la red CENTRAL
+
+![](img/CENTRAL.png)
 
 
 ## 📋 Central – Asignación de IPs
